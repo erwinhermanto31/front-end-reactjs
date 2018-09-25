@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Mahasiswa from './mahasiswa/MahasiswaCreateComponent.jsx';
-import ListMahasiswa from './mahasiswa/MahasiswaListComponent.jsx';
-import MahasiswaEdit from './mahasiswa/MahasiswaEditComponent.jsx';
+import Barang from './barang/BarangCreateComponent.jsx';
+import ListBarang from './barang/BarangListComponent.jsx';
+import BarangEdit from './barang/BarangEditComponent.jsx';
 
 class App extends Component {
   constructor() {
@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:4007/mahasiswa")
+    fetch("http://localhost:8080/barangs")
       .then((response) => {
         return response.json()
       })
@@ -29,15 +29,15 @@ class App extends Component {
         <Router>
           <div>
             <ul>
-              <li><Link to={'/Mahasiswa'}>Create Mahasiswa</Link></li>
-              <li><Link to={'/MahasiswaList'}>List Mahasiswa</Link></li>
+              <li><Link to={'/Barang'}>Create Barangs</Link></li>
+              <li><Link to={'/BarangList'}>List Barangs</Link></li>
             </ul>
             <hr />
 
             <Switch>
-              <Route exact path='/Mahasiswa' component={Mahasiswa} />
-              <Route exact path='/Mahasiswa/:id' component={MahasiswaEdit} />
-              <Route exact path='/MahasiswaList' component={ListMahasiswa} />
+              <Route exact path='/Barang' component={Barang} />
+              <Route exact path='/Barang/:id' component={BarangEdit} />
+              <Route exact path='/BarangList' component={ListBarang} />
             </Switch>
           </div>
         </Router>

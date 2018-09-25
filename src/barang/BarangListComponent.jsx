@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Router, Switch, Route, Link } from 'react-router-dom';
-import MahasiswaEdit from './MahasiswaEditComponent.jsx';
+import BarangEdit from './BarangEditComponent.jsx';
 
-class ListMahasiswa extends Component {
+class ListBarang extends Component {
     constructor() {
         super();
         this.state = {
@@ -11,7 +11,7 @@ class ListMahasiswa extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:4007/mahasiswa")
+        fetch("http://localhost:8080/barangs")
             .then((response) => {
                 return response.json()
             })
@@ -26,12 +26,11 @@ class ListMahasiswa extends Component {
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nim</th>
-                            <th>Name</th>
-                            <th>Alamat</th>
-                            <th>Fakultas</th>
-                            <th>Jurusan</th>
-                            <th>action</th>
+                            <th>Nama Barang</th>
+                            <th>Deskripsi</th>
+                            <th>Harga</th>
+                            <th>Image</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,19 +39,18 @@ class ListMahasiswa extends Component {
                                 return (
                                     <tr key={item.id}>
                                         <td>{item.id}</td>
-                                        <td>{item.nim}</td>
-                                        <td>{item.nama}</td>
-                                        <td>{item.alamat}</td>
-                                        <td>{item.fakultas}</td>
-                                        <td>{item.jurusan}</td>
-                                        <td><Link to={`/Mahasiswa/${item.id}`}>Edit</Link> | <a>Delete</a></td>
+                                        <td>{item.nama_barang}</td>
+                                        <td>{item.deskripsi}</td>
+                                        <td>{item.harga_barang}</td>
+                                        <td>{item.gambar}</td>
+                                        <td><Link to={`/Barang/${item.id}`}>Edit</Link> | <a>Delete</a></td>
                                     </tr>
                                 )
                             })
                         }
                     </tbody>
                     <Switch>
-                        <Route path="/Mahasiswa/:id" component={MahasiswaEdit} />
+                        <Route path="/Barang/:id" component={BarangEdit} />
                     </Switch>
                 </table>
             </div>
@@ -60,4 +58,4 @@ class ListMahasiswa extends Component {
     }
 }
 
-export default ListMahasiswa;
+export default ListBarang;

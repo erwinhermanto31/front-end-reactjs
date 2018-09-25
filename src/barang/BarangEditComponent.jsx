@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class MahasiswaEdit extends React.Component {
+class BarangEdit extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,11 +18,11 @@ class MahasiswaEdit extends React.Component {
 
     componentDidMount() {
         const { id } = this.props.match.params;
-        fetch(`http://localhost:4007/mahasiswa/${id}`)
+        fetch(`http://localhost:8080/barangs/${id}`)
             .then(response => response.json())
             .then(json => {
                 this.setState({ jsonReturnedValue: json[0]});
-                console.log(this.state.jsonReturnedValue.nim);
+                console.log(this.state.jsonReturnedValue.nama_barang);
             });
     }
 
@@ -30,14 +30,13 @@ class MahasiswaEdit extends React.Component {
         e.preventDefault();
         const { id } = this.props.match.params;
         let reqBody = {
-            nim: this.refs.nim.value,
-            nama: this.refs.nama.value,
-            alamat: this.refs.alamat.value,
-            fakultas: this.refs.fakultas.value,
-            jurusan: this.refs.jurusan.value
+            nama_barang: this.refs.nama_barang.value,
+            deskripsi: this.refs.deskripsi.value,
+            harga_barang: this.refs.harga_barang.value,
+            gambar: this.refs.gambar.value
         };
-        fetch(`http://localhost:4007/mahasiswa/${id}`, {
-            method: 'PUT',
+        fetch(`http://localhost:8080/barangs/${id}`, {
+            method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -59,24 +58,20 @@ class MahasiswaEdit extends React.Component {
             <div className="App">
             <form onSubmit={this.handleSubmit}>
                 <label>
-                    Nim:
-                    <input ref="nim" type="text"    value={this.state.jsonReturnedValue.nim}  onChange={this.onChange} />
+                    Nama Barang:
+                    <input ref="nama_barang" type="text"    value={this.state.jsonReturnedValue.nama_barang}  onChange={this.onChange} />
                 </label>
                 <label>
-                    Nama:
-                    <input ref="nama" type="text"  value={this.state.jsonReturnedValue.nama} onChange={this.onChange} />
+                    Deskripsi:
+                    <input ref="deskripsi" type="text"  value={this.state.jsonReturnedValue.deskripsi} onChange={this.onChange} />
                 </label>
                 <label>
-                    Alamat:
-                    <input ref="alamat" type="text"  value={this.state.jsonReturnedValue.alamat} onChange={this.onChange} />
+                    Harga Barang:
+                    <input ref="harga_barang" type="text"  value={this.state.jsonReturnedValue.harga_barang} onChange={this.onChange} />
                 </label>
                 <label>
-                    Fakultas:
-                    <input ref="fakultas" type="text"  value={this.state.jsonReturnedValue.fakultas} onChange={this.onChange} />
-                </label>
-                <label>
-                    Jurusan:
-                    <input ref="jurusan" type="text"  value={this.state.jsonReturnedValue.jurusan} onChange={this.onChange} />
+                    Gambar:
+                    <input ref="gambar" type="text"  value={this.state.jsonReturnedValue.gambar} onChange={this.onChange} />
                 </label>
                 <input type="submit" value="Submit" />
             </form>
@@ -85,4 +80,4 @@ class MahasiswaEdit extends React.Component {
     }
 }
 
-export default MahasiswaEdit;
+export default BarangEdit;
